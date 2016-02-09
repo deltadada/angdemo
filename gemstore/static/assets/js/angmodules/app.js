@@ -1,7 +1,7 @@
 (function(){
 
 var rootpath = "C:/gitrepo/angular_demo/django_angdemo/angdemo/gemstore/static/";
-var app = angular.module('store', []);
+var app = angular.module('store', ['store-products']); // store depends on store-products
 
 var app = angular.module('store').config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('{$');
@@ -12,9 +12,11 @@ var app = angular.module('store').config(function($interpolateProvider) {
 
 // controller
 app.controller('StoreController', function(){
-	this.products = gems;
+	this.products = gems; // flat db stored in app.js
 });
 
+
+// controller replaced by directive
 // app.controller('PanelController', function(){
 // 	this.tab=1; // initialize tab in controller instead of ng-init
 // 	// this.reviews = reviews;
@@ -28,44 +30,6 @@ app.controller('StoreController', function(){
 // 	}
 
 // });
-
-
-// directive -- convert tag-hyphen to camelCase directive name, e.g. productTitle
-
-app.directive('productTitle', function(){
-	return{
-		restrict: 'E', // type: 'element' is a tag
-		templateUrl: '../static/angcludes/product-title.html',
-	};
-});
-
-app.directive('productReviews', function(){
-	return{
-		restrict: 'E', // type: 'element' is a tag
-		templateUrl: '../static/angcludes/product-reviews.html',
-	};
-});
-
-app.directive('productDescription', function(){
-	return{
-		restrict: 'A', // type: 'attribute' : goes in tag
-		templateUrl: '../static/angcludes/product-description.html',
-	};
-});
-
-app.directive('productSpecs', function(){
-	return{
-		restrict: 'A', // type: 'attribute' : goes in tag
-		templateUrl: '../static/angcludes/product-specs.html',
-	};
-});
-
-app.directive('productReviewform', function(){
-	return{
-		restrict: 'A', // type: 'attribute' : goes in tag
-		templateUrl: '../static/angcludes/product-reviewForm.html',
-	};
-});
 
 // directive with controller
 app.directive('productPanels', function(){
@@ -99,6 +63,44 @@ app.controller("ReviewController", function(){
 		this.review = {};
 	}
 });
+
+// ## these directives moved to 'store-product' dependency in product.js
+// // directive -- convert tag-hyphen to camelCase directive name, e.g. productTitle
+
+// app.directive('productTitle', function(){
+// 	return{
+// 		restrict: 'E', // type: 'element' is a tag
+// 		templateUrl: '../static/angcludes/product-title.html',
+// 	};
+// });
+
+// app.directive('productReviews', function(){
+// 	return{
+// 		restrict: 'E', // type: 'element' is a tag
+// 		templateUrl: '../static/angcludes/product-reviews.html',
+// 	};
+// });
+
+// app.directive('productDescription', function(){
+// 	return{
+// 		restrict: 'A', // type: 'attribute' : goes in tag
+// 		templateUrl: '../static/angcludes/product-description.html',
+// 	};
+// });
+
+// app.directive('productSpecs', function(){
+// 	return{
+// 		restrict: 'A', // type: 'attribute' : goes in tag
+// 		templateUrl: '../static/angcludes/product-specs.html',
+// 	};
+// });
+
+// app.directive('productReviewform', function(){
+// 	return{
+// 		restrict: 'A', // type: 'attribute' : goes in tag
+// 		templateUrl: '../static/angcludes/product-reviewForm.html',
+// 	};
+// });
 
 var reviews=[
 {
